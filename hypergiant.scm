@@ -4,8 +4,8 @@
 
 (module hypergiant ()
 
-(import chicken scheme foreign)
-(use opengl-glew gl-math gl-utils gl-type noise soil
+(import scheme (chicken base) (chicken foreign) (chicken keyword) (chicken module)
+ epoxy gl-math gl-utils gl-type noise soil
      (prefix hyperscene scene:) (prefix glls-render glls:)
      hypergiant-render-pipeline
      hypergiant-window
@@ -13,7 +13,7 @@
      hypergiant-sprites
      hypergiant-particles
      hypergiant-geometry
-     hypergiant-models)
+     #;hypergiant-models)
 
 (include "utils")
 (include "math")
@@ -24,8 +24,8 @@
           hypergiant-sprites
           hypergiant-particles
           hypergiant-geometry
-          hypergiant-models
-          (prefix opengl-glew gl:)
+          #;hypergiant-models
+          (prefix epoxy gl:)
           (except hyperscene
                   init
                   make-camera

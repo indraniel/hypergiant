@@ -4,8 +4,7 @@
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera.
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera-r (make-parameter #f))
@@ -60,10 +59,10 @@
             radius: 0.4))
 
 (define (update delta)
-  (yaw-camera! (camera-r) (/ (pan) 30))
-  (pitch-camera! (camera-r) (/ (tilt) 30))
-  (roll-camera! (camera-r) (/ (c-roll) 30))
-  (zoom-camera! (camera-r) (/ (zoom) 10))
+  (yaw-camera! (camera-r) (/ (pan) 30.))
+  (pitch-camera! (camera-r) (/ (tilt) 30.))
+  (roll-camera! (camera-r) (/ (c-roll) 30.))
+  (zoom-camera! (camera-r) (/ (zoom) 10.))
 
   (update-camera (camera-r))
   (update-camera (camera-l)))
@@ -72,7 +71,7 @@
 ;; Framebuffer size is used to ensure that this works on displays of all pixel densities
 (define (pre-render)
   (let-values (((w h) (get-framebuffer-size)))
-    (let ((w/2 (* w 0.5)))
+    (let ((w/2 (inexact->exact (round (* w 0.5)))))
       (gl:scissor 0 0 w/2 h)
      (render-camera (camera-l))
      (gl:scissor w/2 0 w/2 h)

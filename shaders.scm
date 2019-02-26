@@ -8,10 +8,10 @@
  set-max-lights!
  color-conversion)
 
-(import chicken scheme)
-(use hypergiant-render-pipeline
+(import scheme (chicken base) (chicken platform)
+hypergiant-render-pipeline
      (prefix glls-render glls:) (prefix hyperscene scene:))
-(import-for-syntax glls-compiler)
+(import-for-syntax (chicken platform) glls-compiler)
 
 (export-pipeline
  mesh-pipeline

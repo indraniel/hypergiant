@@ -17,8 +17,8 @@
               get-vertex-attribute type->make-vector type->pointer
               emitter-emitter))
 
-(import chicken scheme foreign)
-(use (prefix glls-render glls:) (prefix opengl-glew gl:)
+(import scheme (chicken base) (chicken foreign) (chicken keyword) (chicken syntax)
+(prefix glls-render glls:) (prefix epoxy gl:)
      gl-utils (prefix hyperscene scene:)
      srfi-1 srfi-4 srfi-99 miscmacros
      hypergiant-render-pipeline)

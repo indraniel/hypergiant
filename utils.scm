@@ -13,7 +13,7 @@
         black white
         add-light)
 
-(use srfi-4 miscmacros)
+(import srfi-4 miscmacros)
 
 ;;; Strings
 (define (update-string-mesh! mesh node string face)

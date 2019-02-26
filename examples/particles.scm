@@ -9,8 +9,7 @@
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera.
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) srfi-4 hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))
@@ -88,9 +87,9 @@
                                            (* delta 0.2)))
                                    global-vector)))))))
 
-  (yaw-camera! (camera) (/ (pan) 30))
-  (pitch-camera! (camera) (/ (tilt) 30))
-  (roll-camera! (camera) (/ (c-roll) 30))
-  (zoom-camera! (camera) (/ (zoom) 10)))
+  (yaw-camera! (camera) (/ (pan) 30.))
+  (pitch-camera! (camera) (/ (tilt) 30.))
+  (roll-camera! (camera) (/ (c-roll) 30.))
+  (zoom-camera! (camera) (/ (zoom) 10.)))
 
 (start 640 480 "Particles" resizable: #f init: init update: update)

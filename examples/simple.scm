@@ -2,8 +2,7 @@
 
 ;;;; This example renders a square mesh
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))

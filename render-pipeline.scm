@@ -11,10 +11,11 @@
    add-node
    make-render-pipeline)
 
-(import chicken scheme foreign)
-(use (prefix hyperscene scene:) (prefix glls-render glls:) gl-utils
-     miscmacros srfi-69 lolevel srfi-1 srfi-99)
-(import-for-syntax (prefix glls-render glls:) (prefix hyperscene scene:) srfi-99)
+(import scheme (chicken base) (chicken foreign) (chicken gc) (chicken keyword) (chicken memory)
+ (prefix hyperscene scene:) (prefix glls-render glls:) gl-utils
+     miscmacros srfi-69 srfi-1 srfi-99)
+
+(import-for-syntax (chicken platform) (prefix glls-render glls:) (prefix hyperscene scene:) srfi-99)
 
 (define-record-type render-pipeline
   #t #t

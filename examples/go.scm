@@ -17,8 +17,7 @@
 ;;;; E.g.:
 ;;;; csc -lGL go.scm
 
-(import chicken scheme)
-(use hypergiant srfi-42 miscmacros)
+(import scheme (chicken base) (chicken condition) hypergiant srfi-1 srfi-42 miscmacros)
 
 ;;;
 ;;; Game logic
@@ -365,7 +364,7 @@
 (define board-mesh (cube-mesh 1 normals?: #t))
 (mesh-transform! board-mesh (3d-scaling 1.2 1.2 0.06))
 
-(define line-width (/ 256))
+(define line-width (/ 256.))
 (define grid-line (rectangle-mesh (+ 1 line-width) line-width
                                   centered?: #f))
 
@@ -395,11 +394,11 @@
     (append lateral-lines
             vertical-lines)))
 
-(define marker (circle-mesh (/ 120) 12))
+(define marker (circle-mesh (/ 120.) 12))
 
 (define (build-markers)
-  (let* ((3nodes (/ 3 (sub1 grid-rows)))
-         (15nodes (/ 15 (sub1 grid-rows)))
+  (let* ((3nodes (/ 3. (sub1 grid-rows)))
+         (15nodes (/ 15. (sub1 grid-rows)))
          (marker-points `((,3nodes  . ,3nodes)
                           (,3nodes  . 0.5)
                           (,3nodes  . ,15nodes)
@@ -433,7 +432,7 @@
             color: black
             position: (make-point 0 0 0.0003)))
 
-(define stone-radius (/ 40))
+(define stone-radius (/ 40.))
 (define stone-half-height 0.4)
 (define stone-mesh (sphere-mesh stone-radius 16 normals?: #t))
 (mesh-transform! stone-mesh
@@ -447,10 +446,12 @@
                       mesh: stone-mesh
                       color: (alist-ref (node-color node) colors)
                       material: shiny-material
-                      position: (make-point (/ (car index)
-                                               (sub1 grid-rows))
-                                            (/ (cdr index)
-                                               (sub1 grid-rows))
+                      position: (make-point (exact->inexact
+                                              (/ (car index)
+                                                 (sub1 grid-rows)))
+                                            (exact->inexact
+                                              (/ (cdr index)
+                                                 (sub1 grid-rows)))
                                             (* stone-radius
                                                stone-half-height))
                       radius: stone-radius)))

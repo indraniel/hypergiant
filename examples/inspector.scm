@@ -10,8 +10,7 @@
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera. Numbers 1-6 toggle different meshes.
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))
@@ -19,14 +18,14 @@
 (define tilt (make-parameter 0))
 (define zoom (make-parameter 0))
 (define c-roll (make-parameter 0))
-(define sphere (sphere-mesh 1 32 normals?: #t  texture-width: 1 texture-height: 1))
-(define cube (cube-mesh 2 cube-map?: #t normals?: #t))
-(define sky-box (cube-mesh 50 winding: #:cw cube-map?: #t))
-(define rect (rectangle-mesh 2 2 texture-width: 1 texture-height: 1))
-(define circle (circle-mesh 1 32 texture-radius: 0.5))
-(define cylinder (cylinder-mesh 2 1 1 12 normals?: #t
+(define sphere (sphere-mesh 1. 32 normals?: #t  texture-width: 1 texture-height: 1))
+(define cube (cube-mesh 2. cube-map?: #t normals?: #t))
+(define sky-box (cube-mesh 50. winding: #:cw cube-map?: #t))
+(define rect (rectangle-mesh 2. 2. texture-width: 1 texture-height: 1))
+(define circle (circle-mesh 1. 32 texture-radius: 0.5))
+(define cylinder (cylinder-mesh 2. 1. 1 12 normals?: #t
                                 texture-width: 1 texture-height: 1))
-(define cube-sphere (sphere-mesh 1 12 type: #:cube cube-map?: #t normals?: #t))
+(define cube-sphere (sphere-mesh 1. 12 type: #:cube cube-map?: #t normals?: #t))
 (define earth (make-parameter #f))
 (define dock (make-parameter #f))
 (define active-node (make-parameter #f))
@@ -190,9 +189,9 @@
   (add-sphere))
 
 (define (update delta)
-  (yaw-camera! (camera) (/ (pan) 30))
-  (pitch-camera! (camera) (/ (tilt) 30))
-  (roll-camera! (camera) (/ (c-roll) 30))
-  (zoom-camera! (camera) (/ (zoom) 10)))
+  (yaw-camera! (camera) (/ (pan) 30.))
+  (pitch-camera! (camera) (/ (tilt) 30.))
+  (roll-camera! (camera) (/ (c-roll) 30.))
+  (zoom-camera! (camera) (/ (zoom) 10.)))
 
 (start 640 480 "Inspector" resizable: #f init: init update: update)

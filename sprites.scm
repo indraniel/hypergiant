@@ -18,7 +18,10 @@
  animation-n-frames
  animation-frames)
 
-(import chicken scheme)
+(import scheme (chicken base) (chicken module)
+(prefix glls-render glls:) (prefix hyperscene scene:) gl-utils
+     hypergiant-render-pipeline hypergiant-shaders
+     srfi-1 srfi-42 srfi-99 miscmacros)
 
 ;; For internal use
 (export
@@ -29,10 +32,6 @@
  animated-sprite-timer
  animated-sprite-frame
  animated-sprite-animation)
-
-(use (prefix glls-render glls:) (prefix hyperscene scene:) gl-utils
-     hypergiant-render-pipeline hypergiant-shaders
-     srfi-1 srfi-42 srfi-99 miscmacros)
 
 (define-record-type animated-sprite
   %make-animated-sprite #t

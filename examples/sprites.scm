@@ -14,8 +14,7 @@
                                          "/Fonts/Arial.ttf")))
                (else "/usr/share/fonts/truetype/msttcorefonts/arial.ttf")))
 
-(import chicken scheme)
-(use hypergiant data-structures)
+(import scheme (chicken base) srfi-1 hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))

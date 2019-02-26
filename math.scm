@@ -3,7 +3,7 @@
 ;;;; Math utilities
 ;;;; Imported by hypergiant.scm
 
-(use data-structures random-bsd)
+(import (chicken random))
 
 (export random-normal
         random-float
@@ -22,9 +22,12 @@
         smoother-step)
 
 (define (random-normal mean sd)
-  (+ mean (* sd (/ (random 1000000) 1000000))))
+  (+ mean (* sd (pseudo-random-real))))
 
-(define random-float random-real)
+(define (random-float)
+  ((if (zero? (pseudo-random-integer 2)) + -)
+   (let lp ((n (pseudo-random-real)))
+     (if (= n 1.0) (lp (pseudo-random-real)) n))))
 
 (define (clamp x l u)
   (min (max x l) u))

@@ -8,11 +8,11 @@
  animate-model-frames
  update-animated-model!)
 
-(import chicken scheme foreign)
-(use hypergiant-sprites hypergiant-render-pipeline
+(import scheme (chicken base) (chicken foreign) (chicken gc) (chicken keyword) (chicken memory) (chicken module)
+     hypergiant-sprites hypergiant-render-pipeline
      (prefix hyperscene scene:)
-     (prefix gl-utils gl:) (except bitstring bitstring->vector) gl-math
-     data-structures srfi-1 srfi-4 srfi-99 miscmacros lolevel)
+     (prefix gl-utils gl:) #;TODO #;(except bitstring bitstring->vector) gl-math
+     srfi-1 srfi-4 srfi-99 miscmacros)
 
 (define-record-type (animated-model animated-sprite)
   %make-animated-model #t

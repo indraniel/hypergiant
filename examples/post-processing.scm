@@ -8,8 +8,7 @@
 ;;;; csc -lGL post-processing.scm
 
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) (chicken bitwise) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))

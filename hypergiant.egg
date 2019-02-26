@@ -1,0 +1,42 @@
+;; hypergiant.egg -*- scheme -*-
+
+((synopsis "Game library")
+ (author "Alex Charlton")
+ (category graphics)
+ (license "BSD-2-Clause")
+ (dependencies  glfw3 glls epoxy gl-math gl-utils gl-type hyperscene
+                noise soil miscmacros srfi-42 srfi-99 #;bitstring)
+ (test-dependencies test)
+ (components (extension hypergiant
+                        (source-dependencies "utils.scm" "math.scm")
+                        (component-dependencies hypergiant-render-pipeline
+                                                hypergiant-window
+                                                hypergiant-shaders
+                                                hypergiant-sprites
+                                                hypergiant-particles
+                                                hypergiant-geometry
+                                                #;hypergiant-models))
+             (extension hypergiant-render-pipeline
+                        (source "render-pipeline.scm"))
+             (extension hypergiant-particles
+                        (source "particles.scm")
+                        (component-dependencies hypergiant-render-pipeline))
+             (extension hypergiant-window
+                        (source "window.scm")
+                        (source-dependencies "input.scm"))
+             (extension hypergiant-sprites
+                        (source "sprites.scm")
+                        (component-dependencies hypergiant-render-pipeline
+                                                hypergiant-shaders))
+             (extension hypergiant-shaders
+                        (source "shaders.scm")
+                        (source-dependencies "pipelines.scm" "es-pipelines.scm")
+                        (component-dependencies hypergiant-render-pipeline))
+             (extension hypergiant-geometry
+                        (source "geometry.scm"))
+             #;(extension hypergiant-models
+                        (source "models.scm")
+                        (source-dependencies "iqm.scm")
+                        (component-dependencies hypergiant-render-pipeline
+                                                hypergiant-sprites))
+             ))

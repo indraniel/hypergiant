@@ -10,8 +10,8 @@
  cube-mesh
  line-mesh)
 
-(import chicken scheme)
-(use gl-utils gl-math srfi-1 srfi-42 miscmacros data-structures)
+(import scheme (chicken base)
+gl-utils gl-math srfi-1 srfi-42 miscmacros)
 
 (define (index-winding indices winding)
   (ecase winding
@@ -242,14 +242,14 @@
         (list-ec (:list y ys)
                  (:list x xs)
                  (list x y zs))))))
-  (let* ((front-top-left     '(-1  1  1))
-         (front-top-right    '( 1  1  1))
-         (front-bottom-left  '(-1 -1  1))
-         (front-bottom-right '( 1 -1  1))
-         (back-top-left      '(-1  1 -1))
-         (back-top-right     '( 1  1 -1))
-         (back-bottom-left   '(-1 -1 -1))
-         (back-bottom-right  '( 1 -1 -1))
+  (let* ((front-top-left     '(-1.  1.  1.))
+         (front-top-right    '( 1.  1.  1.))
+         (front-bottom-left  '(-1. -1.  1.))
+         (front-bottom-right '( 1. -1.  1.))
+         (back-top-left      '(-1.  1. -1.))
+         (back-top-right     '( 1.  1. -1.))
+         (back-bottom-left   '(-1. -1. -1.))
+         (back-bottom-right  '( 1. -1. -1.))
          (unit-cube (append! (gen-face front-top-left front-bottom-right) ; front
                             (gen-face front-top-right back-bottom-right) ; right
                             (gen-face back-top-right back-bottom-left)   ; back

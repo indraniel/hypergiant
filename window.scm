@@ -17,9 +17,9 @@
  set-clipboard-string
  make-camera)
 
-(import chicken scheme foreign)
-(use (prefix glfw3 %) (prefix glfw3-bindings %%)
-     (prefix opengl-glew gl:) (prefix glls glls:)
+(import scheme (chicken base) (chicken bitwise) (chicken foreign) (chicken format) (chicken gc) (chicken keyword) (chicken module) (chicken platform)
+ (prefix glfw3 %) (prefix glfw3-bindings %%)
+     (prefix epoxy gl:) (prefix glls glls:)
      gl-math gl-utils (prefix hyperscene scene:) gl-type
      srfi-1 srfi-4 srfi-18 srfi-99 miscmacros)
 
@@ -77,7 +77,6 @@
   (%%set-scroll-callback (%window) #$hpgScrollCallback)
   (%%set-key-callback (%window) #$hpgKeyCallback)
   (%%set-char-callback (%window) #$hpgCharCallback)
-  (gl:init)
   (gl:enable gl:+depth-test+)
   (gl:enable gl:+blend+)
   (gl:blend-func gl:+src-alpha+ gl:+one-minus-src-alpha+)
