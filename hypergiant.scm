@@ -13,7 +13,7 @@
      hypergiant-sprites
      hypergiant-particles
      hypergiant-geometry
-     #;hypergiant-models)
+     hypergiant-models)
 
 (include "utils")
 (include "math")
@@ -24,7 +24,7 @@
           hypergiant-sprites
           hypergiant-particles
           hypergiant-geometry
-          #;hypergiant-models
+          hypergiant-models
           (prefix epoxy gl:)
           (except hyperscene
                   init

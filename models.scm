@@ -8,10 +8,10 @@
  animate-model-frames
  update-animated-model!)
 
-(import scheme (chicken base) (chicken foreign) (chicken gc) (chicken keyword) (chicken memory) (chicken module)
+(import scheme (chicken base) (chicken bitwise) (chicken foreign) (chicken format) (chicken gc) (chicken keyword) (chicken memory) (chicken module)
      hypergiant-sprites hypergiant-render-pipeline
      (prefix hyperscene scene:)
-     (prefix gl-utils gl:) #;TODO #;(except bitstring bitstring->vector) gl-math
+     (prefix gl-utils gl:) (except bitstring bitstring->vector) gl-math
      srfi-1 srfi-4 srfi-99 miscmacros)
 
 (define-record-type (animated-model animated-sprite)

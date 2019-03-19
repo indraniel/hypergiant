@@ -1,4 +1,13 @@
-(use test hypergiant miscmacros lolevel srfi-1)
+(import
+  (chicken memory)
+  test
+  hypergiant-models
+  hypergiant-sprites
+  gl-math
+  (prefix gl-utils-core #:gl)
+  miscmacros
+  srfi-1
+  srfi-4)
 
 (test-begin "load-iqm")
 (test-assert (load-iqm "./cube.iqm"))
