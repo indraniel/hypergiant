@@ -27,7 +27,6 @@
           hypergiant-models
           (prefix epoxy gl:)
           (except hyperscene
-                  init
                   make-camera
                   resize-cameras
                   add-node

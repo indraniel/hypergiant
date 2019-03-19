@@ -6,7 +6,7 @@
  (category graphics)
  (license "BSD-2-Clause")
  (dependencies  glfw3 glls epoxy gl-math gl-utils gl-type hyperscene
-                noise soil miscmacros srfi-42 srfi-99 bitstring)
+                noise soil miscmacros srfi-18 srfi-42 srfi-99 bitstring)
  (test-dependencies test)
  (component-options (csc-options -O3 -d0))
  (components (extension hypergiant
@@ -40,5 +40,4 @@
                         (source "models.scm")
                         (source-dependencies "iqm.scm")
                         (component-dependencies hypergiant-render-pipeline
-                                                hypergiant-sprites))
-             ))
+                                                hypergiant-sprites))))
