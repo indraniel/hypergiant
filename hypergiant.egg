@@ -2,6 +2,7 @@
 
 ((synopsis "Game library")
  (author "Alex Charlton")
+ (maintainer "Adrien (Kooda) Ramos")
  (category graphics)
  (license "BSD-2-Clause")
  (dependencies  glfw3 glls epoxy gl-math gl-utils gl-type hyperscene

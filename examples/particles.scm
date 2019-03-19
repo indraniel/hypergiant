@@ -3,9 +3,9 @@
 ;;;; This example illustrates Hypergiant's particle system.
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL particles.scm
+;;;; csc -L -lepoxy particles.scm
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera.
 

@@ -3,9 +3,9 @@
 ;;;; This example illustrates alpha sorting.
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL alpha.scm
+;;;; csc -L -lepoxy alpha.scm
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera.
 

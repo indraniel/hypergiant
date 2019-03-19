@@ -13,9 +13,9 @@
                (else "/usr/share/fonts/truetype/msttcorefonts/arial.ttf")))
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL go.scm
+;;;; csc -L -lepoxy go.scm
 
 (import scheme (chicken base) (chicken condition) hypergiant srfi-1 srfi-42 miscmacros)
 

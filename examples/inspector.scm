@@ -4,9 +4,9 @@
 ;;;; This must be run in the examples directory
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL inspector.scm
+;;;; csc -L -lepoxy inspector.scm
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera. Numbers 1-6 toggle different meshes.
 

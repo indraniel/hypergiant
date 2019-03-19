@@ -9,13 +9,13 @@ Note that this is an early release of Hypergiant. Some features that you might e
 
 
 ## Installation
-This repository is a [Chicken Scheme](http://call-cc.org/) egg.
+This repository is a [Chicken Scheme](https://call-cc.org/) egg.
 
-It is part of the [Chicken egg index](http://wiki.call-cc.org/chicken-projects/egg-index-4.html) and can be installed with `chicken-install hypergiant`.
+It is part of the [Chicken egg index](https://eggs.call-cc.org/5) and can be installed with `chicken-install hypergiant`.
 
 
 ## Requirements
-* opengl-glew
+* epoxy
 * glfw3
 * gl-utils
 * gl-math
@@ -24,12 +24,11 @@ It is part of the [Chicken egg index](http://wiki.call-cc.org/chicken-projects/e
 * Hyperscene
 * noise
 * soil
-* random-bsd
 * miscmacros
 * srfi-42
 * srfi-99
 
-While Hypergiant doesn’t require any external libraries directly, opengl-glew and glfw3 depend on OpenGL, [GLEW](http://glew.sourceforge.net/), [GLFW](http://www.glfw.org/) (the most recent major version is required: 3.X). gl-type depends on [Freetype](http://www.freetype.org/)
+While Hypergiant doesn’t require any external libraries directly, epoxy and glfw3 depend on OpenGL, [libepoxy](https://github.com/anholt/libepoxy), [GLFW](http://www.glfw.org/) (the most recent major version is required: 3.X). gl-type depends on [Freetype](http://www.freetype.org/)
 
 When installing GLFW on OS X through Homebrew, an extra step is needed. Homebrew renames the library’s from the default. You can fix this by creating a link that points to the library that gets installed. E.g. `sudo ln -s <homebrew-lib-dir>/glfw3.dylib /usr/local/lib/libglfw.dylib`
 
@@ -47,14 +46,14 @@ Hypergiant is a largely a glue library, intending to make the creation of real-t
 
 Hypergiant reexports (and uses) the following libraries:
 
-- [opengl-glew](http://wiki.call-cc.org/eggref/4/opengl-glew) (prefix `gl:`): Bindings to core OpenGL or OpenGL ES
-- [glls](http://wiki.call-cc.org/eggref/4/glls) (some macros modified, as noted below): Creates OpenGL Shader Language shaders in Scheme, and compiles rendering functions in C for use with the shaders
-- [Hyperscene](http://wiki.call-cc.org/eggref/4/hyperscene) (some functions modified, as noted below): Scene management with a scene-graph, cameras, frustum culling, and a lighting extension (extensible only in C)
-- [gl-utils](http://wiki.call-cc.org/eggref/4/gl-utils) (gl-utils-core is prefixed with `gl:`, all other modules have no prefix): Extends OpenGL to help make common operations easier
-- [gl-math](http://wiki.call-cc.org/eggref/4/gl-math): Provides fast matrix, quaternion, and vector manipulation functions, suitable for use with OpenGL
-- [gl-type](http://wiki.call-cc.org/eggref/4/gl-type): Loads Truetype fonts and renders them as OpenGL objects
-- [soil](http://wiki.call-cc.org/eggref/4/soil): Image loading for OpenGL
-- [noise](http://wiki.call-cc.org/eggref/4/noise): Noise functions that run on the GPU, created as glls shaders
+- [epoxy](https://wiki.call-cc.org/egg/epoxy) (prefix `gl:`): Bindings to core OpenGL or OpenGL ES
+- [glls](https://wiki.call-cc.org/egg/glls) (some macros modified, as noted below): Creates OpenGL Shader Language shaders in Scheme, and compiles rendering functions in C for use with the shaders
+- [Hyperscene](https://wiki.call-cc.org/egg/hyperscene) (some functions modified, as noted below): Scene management with a scene-graph, cameras, frustum culling, and a lighting extension (extensible only in C)
+- [gl-utils](https://wiki.call-cc.org/egg/gl-utils) (gl-utils-core is prefixed with `gl:`, all other modules have no prefix): Extends OpenGL to help make common operations easier
+- [gl-math](https://wiki.call-cc.org/egg/gl-math): Provides fast matrix, quaternion, and vector manipulation functions, suitable for use with OpenGL
+- [gl-type](https://wiki.call-cc.org/egg/gl-type): Loads Truetype fonts and renders them as OpenGL objects
+- [soil](https://wiki.call-cc.org/egg/soil): Image loading for OpenGL
+- [noise](https://wiki.call-cc.org/egg/noise): Noise functions that run on the GPU, created as glls shaders
 
 Because Hypergiant reexports from all of these eggs, when the import list of one of these eggs changes, Hypergiant must be reinstalled in order to reflect the change. You can use the following command to ensure that a full update is performed:
 
@@ -80,7 +79,7 @@ Hypergiant is designed to work by default with OpenGL 3.3 and GLSL version 330 (
 ### Main loop and window
     [procedure] (start WIDTH HEIGHT TITLE [init: INIT] [update: UPDATE] [pre-render: PRE-RENDER] [post-render: POST-RENDER] [cleanup: CLEANUP] . WINDOW-HINTS)
 
-Start the main body of the program, creating a new window with dimensions `WIDTH` and `HEIGHT`, and the given `TITLE`. `INIT` may be a function of zero arguments that will be called during the initialization sequence, after all libraries are initialized, but before the main loop. `UPDATE` may be a function of one argument (`delta`: the time that passed between the current update and the last one) that is called once per frame before scenes are updated and rendered. `PRE-RENDER` and `POST-RENDER` may be functions of zero arguments that perform some action immediately before and after `render-cameras` is called, respectively. `CLEANUP` may be a function of zero arguments which is called before the window is closed. `WINDOW-HINTS` accepts the same keyword arguments as [`make-window`](http://api.call-cc.org/doc/glfw3/make-window).
+Start the main body of the program, creating a new window with dimensions `WIDTH` and `HEIGHT`, and the given `TITLE`. `INIT` may be a function of zero arguments that will be called during the initialization sequence, after all libraries are initialized, but before the main loop. `UPDATE` may be a function of one argument (`delta`: the time that passed between the current update and the last one) that is called once per frame before scenes are updated and rendered. `PRE-RENDER` and `POST-RENDER` may be functions of zero arguments that perform some action immediately before and after `render-cameras` is called, respectively. `CLEANUP` may be a function of zero arguments which is called before the window is closed. `WINDOW-HINTS` accepts the same keyword arguments as [`make-window`](https://api.call-cc.org/5/doc/glfw3/make-window).
 
     [procedure] (stop)
 
@@ -208,7 +207,7 @@ A parameter that may be set to a two argument function, which is called when the
 
 
 ### Scenes
-Hypergiant reexports most of [Hyperscene](http://wiki.call-cc.org/eggref/4/hyperscene) except for `resize-cameras`, since it manages this functionality. `resize-cameras` is handled by `start`. `add-node`, `add-light`, `make-camera`, and `set-max-lights!` are modified as described below.
+Hypergiant reexports most of [Hyperscene](https://wiki.call-cc.org/egg/hyperscene) except for `resize-cameras`, since it manages this functionality. `resize-cameras` is handled by `start`. `add-node`, `add-light`, `make-camera`, and `set-max-lights!` are modified as described below.
 
 Cameras are automatically resized in Hypergiant so that their projection matrix matches the bounds of the window.
 
@@ -238,7 +237,7 @@ This extension of the Hyperscene function of the same name (along with Hypergian
 
 `POSITION` expects a gl-math point. When `POSITION` is provided, `set-node-position!` is called with `POSITION` after the node is created. `RADIUS` expects a float. When `RADIUS` is provided, `set-node-bounding-sphere!` is called with `RADIUS` after the node is created.
 
-When `PIPELINE` is a render-pipeline the node data that is created is a [glls renderable](http://wiki.call-cc.org/eggref/4/glls#renderables) object. `MESH`, `VAO`, `MODE`, `N-ELEMENTS`, `ELEMENT-TYPE`, and `OFFSET` all function as they do when making a renderable. Additionally, `MESH` may be passed to `add-node` when its VAO has not yet been created (i.e. with [`mesh-make-vao!`](http://api.call-cc.org/doc/gl-utils/mesh-make-vao%21)), and `mesh-make-vao!` will be called automatically, influenced by the optional `USAGE` keyword (defaulting to `#:static`). `DRAW-ARRAYS?` is a boolean that indicates whether or not the renderable’s array rendering function should be used (i.e. `draw-arrays` is used instead of `draw-elements`). `DRAW-ARRAYS?` defaults to `#t` if `MESH` has no index data, and `#f` otherwise. `add-node` accepts other keyword `UNIFORM-ARGS`, which are used to set the value for each uniform in the pipeline, as required by glls renderable makers.
+When `PIPELINE` is a render-pipeline the node data that is created is a [glls renderable](https://wiki.call-cc.org/egg/glls#renderables) object. `MESH`, `VAO`, `MODE`, `N-ELEMENTS`, `ELEMENT-TYPE`, and `OFFSET` all function as they do when making a renderable. Additionally, `MESH` may be passed to `add-node` when its VAO has not yet been created (i.e. with [`mesh-make-vao!`](https://api.call-cc.org/5/doc/gl-utils/mesh-make-vao%21)), and `mesh-make-vao!` will be called automatically, influenced by the optional `USAGE` keyword (defaulting to `#:static`). `DRAW-ARRAYS?` is a boolean that indicates whether or not the renderable’s array rendering function should be used (i.e. `draw-arrays` is used instead of `draw-elements`). `DRAW-ARRAYS?` defaults to `#t` if `MESH` has no index data, and `#f` otherwise. `add-node` accepts other keyword `UNIFORM-ARGS`, which are used to set the value for each uniform in the pipeline, as required by glls renderable makers.
 
 `add-node` appends a number of Hyperscene values to its renderable creation call, for convenience. The following keys and values are added, which must correspond to the names of uniforms in the renderable’s pipeline if they are to be used:
 
@@ -264,9 +263,9 @@ It’s worth noting that when `add-node` is called with a mesh, no references to
     [macro] (define-pipeline PIPELINE-NAME . SHADERS)
     [macro] (define-alpha-pipeline PIPELINE-NAME . SHADERS)
 
-Accepts arguments identical to glls’ [`define-pipeline`](http://api.call-cc.org/doc/glls/define-pipeline), but additionally defines a *render-pipeline* object with the name `PIPELINE-NAME-render-pipeline`. This render-pipeline object should be passed to `add-node`, and contains all the functions necessary to render the pipeline’s renderables. In other words, this creates managed Hyperscene pipeline objects that you don’t need to worry about. Additional work occurs if you evaluate (i.e. don’t compile) a program that uses `define-pipeline`.
+Accepts arguments identical to glls’ [`define-pipeline`](https://api.call-cc.org/5/doc/glls/define-pipeline), but additionally defines a *render-pipeline* object with the name `PIPELINE-NAME-render-pipeline`. This render-pipeline object should be passed to `add-node`, and contains all the functions necessary to render the pipeline’s renderables. In other words, this creates managed Hyperscene pipeline objects that you don’t need to worry about. Additional work occurs if you evaluate (i.e. don’t compile) a program that uses `define-pipeline`.
 
-The functions in the Hyperscene pipelines created by `define-pipeline` correspond to the begin render, render, and end render [“fast” functions](http://wiki.call-cc.org/eggref/4/glls#fast-render-functions) created by glls. Setting the `unique-textures?` parameter, to `#f` (for syntax), if a pipeline is known to use only one texture (for each sampler type), may improve speed.
+The functions in the Hyperscene pipelines created by `define-pipeline` correspond to the begin render, render, and end render [“fast” functions](https://wiki.call-cc.org/egg/glls#fast-render-functions) created by glls. Setting the `unique-textures?` parameter, to `#f` (for syntax), if a pipeline is known to use only one texture (for each sampler type), may improve speed.
 
 `define-alpha-pipeline` works the same, but the creates a pipeline that is potentially transparent to some degree. This additional macro is necessary since Hyperscene renders alpha objects at a different stage, in a different order from opaque objects. 
 
@@ -446,7 +445,7 @@ Here’s a simple shader using this shader:
 
 
 ### Geometry
-Hypergiant provides numerous functions for generating [gl-utils mesh](http://api.call-cc.org/doc/gl-utils#sec:gl-utils-mesh) primitives. The attributes of these meshes are all named with the same convention as the [pre-defined pipelines](#pre-defined-pipelines-and-shaders): The vertex position, normal, three element colour, and texture coordinate attributes are named `position`, `normal`, `color`, and `tex-coord`, respectively. Positions and normals are always `vec3`s, represented as floats in memory, while the type of the other attributes can be controlled with arguments.
+Hypergiant provides numerous functions for generating [gl-utils mesh](https://api.call-cc.org/5/doc/gl-utils#sec:gl-utils-mesh) primitives. The attributes of these meshes are all named with the same convention as the [pre-defined pipelines](#pre-defined-pipelines-and-shaders): The vertex position, normal, three element colour, and texture coordinate attributes are named `position`, `normal`, `color`, and `tex-coord`, respectively. Positions and normals are always `vec3`s, represented as floats in memory, while the type of the other attributes can be controlled with arguments.
 
     [procedure] (line-mesh POINTS [mode: MODE])
 
@@ -464,7 +463,7 @@ Create a circular mesh with `RADIUS` and `RESOLUTION` triangular slices, with th
 
 Create a cube mesh with sides of `LENGTH` with the centre of the cube at the origin. Each face of the cube has a unique set of vertices – i.e. no face shares vertices. When `NORMALS?` is `#t`, normals are added to the mesh. When `CUBE-MAP?` is `#t`, three element texture coordinates are added to the mesh, corresponding to a unit-cube. Alternately, `TEXTURE` may be supplied, which expects a function of one argument: the index of a vertex. This texture function should return a three element list of the texture coordinate at that index. The cube mesh vertices are ordered as follows: each face has vertices `(upper-left upper-right lower-left lower-right)`, and the faces are ordered `(front right back left top bottom)`. The up direction for each face can be seen in the image below:
 
-![Cube wrapping](https://github.com/AlexCharlton/hypergiant/raw/master/doc-images/cube-mapping.png)
+![Cube wrapping](https://www.upyum.com/cgit.cgi/hypergiant/plain/doc-images/cube-mapping.png)
 
 Likewise, `COLOR` expects a similar function that accepts one index as an argument, but should return a three element list of colour values. `WINDING` controls the direction of the vertex winding, either counter-clockwise (`#:ccw`, the default), or clockwise (`#:cw`). `MODE` should be a valid argument to `mode->gl`,  defaulting to `#:triangles`. `TEXTURE-TYPE`, `COLOUR-TYPE`, and `INDEX-TYPE` control the in-memory type of the texture attribute, the color attribute, and the index, and should be a valid argument to `type->gl`. `TEXTURE-TYPE` defaults to `#:float`, while `COLOUR-TYPE` and `INDEX-TYPE` default to `#:ushort`.
 
@@ -473,7 +472,7 @@ Likewise, `COLOR` expects a similar function that accepts one index as an argume
 
 Create a spherical mesh of `RADIUS` with the centre of the sphere at the origin. Depending on `TYPE`, the way the sphere is created will differ: `#:uv` will create a UV sphere – with vertices positioned on longitude/latitude points – `#:cube` will create a cube sphere – with vertices positioned on a deformed cube. The former is useful for 2D texture mapping, but will necessarily have increasingly large deformation towards the poles, and lower resolution near the equator. The latter is useful for a cube-mapped texture, for minimal deformation. The images below illustrates a UV sphere and cube sphere, respectively.
 
-![UV sphere](https://github.com/AlexCharlton/hypergiant/raw/master/doc-images/uv-sphere.gif) ![Cube sphere](https://github.com/AlexCharlton/hypergiant/raw/master/doc-images/cube-sphere.gif)
+![UV sphere](https://www.upyum.com/cgit.cgi/hypergiant/plain/doc-images/uv-sphere.gif) ![Cube sphere](https://www.upyum.com/cgit.cgi/hypergiant/plain/doc-images/cube-sphere.gif)
 
 For the UV sphere, `RESOLUTION` sets the number of longitudinal subdivisions, half of which is the number of latitudinal subdivisions (`RESOLUTION` must be a factor of 2). Setting both `TEXTURE-WIDTH` and `TEXTURE-HEIGHT` for a UV sphere causes 2 element texture coordinates to be added to the mesh, with `TEXTURE-OFFSET` representing the upper left corner of the texture, defaulting to `(0 0)`. The texture’s upper left corner is mapped to the left side of the sphere, wrapping counter-clockwise such that the left half of the texture corresponds to the front half of the sphere. Alternately, `TEXTURE` may be supplied, which expects a function of one argument: the index of a vertex. This texture function should return a two element list of the texture coordinate at that index. The cube mesh vertices are ordered as a rectangular array with `RESOLUTION + 1` columns and `RESOLUTION/2 + 1` rows. The first row corresponds to the “north” pole, while the last corresponds to the “south” pole. The first column has the same position as the last. This array is wrapped counter-clockwise around the sphere, starting on the left. Likewise, `COLOR` expects a similar function that accepts one index as an argument, but should return a three element list of colour values. 
 
@@ -571,7 +570,7 @@ A list of attribute symbols which should be normalized when creating a mesh from
 
 
 ### Animated models
-Animated models are an opaque object similar to animated sprites, but for rigged models. Animated models are used with the same animation getting and setting functions as [animated sprites](http://wiki.call-cc.org/eggref/4/hypergiant#animated-sprites), i.e. `current-animation` and `set-animation!`. Animations suitable for animated models are created when loading IQM files containing animations (which can be referenced with `iqm-animations`).
+Animated models are an opaque object similar to animated sprites, but for rigged models. Animated models are used with the same animation getting and setting functions as [animated sprites](https://wiki.call-cc.org/egg/hypergiant#animated-sprites), i.e. `current-animation` and `set-animation!`. Animations suitable for animated models are created when loading IQM files containing animations (which can be referenced with `iqm-animations`).
 
     [procedure] (add-new-animated-model PARENT PIPELINE mesh: MESH base-animation: BASE-ANIMATION . ARGS)
 
@@ -583,7 +582,7 @@ Update the `ANIMATED-MODEL` given the time interval `DELTA`, changing the curren
 
 
 ### Particle system
-Hypergiant’s particle system is implemented as an extension to Hyperscene. It introduces two concepts: *emitters* and *particles*. Emitters are a record that is created when added to a scene (via `add-emitter`), similar to a node. These records contain a reference to the node that is used to move them around the scene. Emitters also share properties with [meshes](http://wiki.call-cc.org/eggref/4/gl-utils#gl-utils-mesh). A component of the emitter is essentially a mesh where each vertex corresponds to a particle, and the same attribute system is shared with meshes.
+Hypergiant’s particle system is implemented as an extension to Hyperscene. It introduces two concepts: *emitters* and *particles*. Emitters are a record that is created when added to a scene (via `add-emitter`), similar to a node. These records contain a reference to the node that is used to move them around the scene. Emitters also share properties with [meshes](https://wiki.call-cc.org/egg/gl-utils#gl-utils-mesh). A component of the emitter is essentially a mesh where each vertex corresponds to a particle, and the same attribute system is shared with meshes.
 
 Emitters are used to “emit” a number of particles. These particles are created and updated via the `for-emitter` macro.
 
@@ -616,7 +615,7 @@ Return the maximum number of particles that can be created by `EMITTER`.
 
 Add a new emitter to the node or scene `PARENT`, returning an emitter record. `PIPELINE` is the render-pipeline used to render the emitter.
 
-`ATTRIBUTES` is a list of the kind that would be passed as the `ATTRIBUTES` argument in [make-mesh](http://api.call-cc.org/doc/gl-utils/make-mesh), a list in the form:
+`ATTRIBUTES` is a list of the kind that would be passed as the `ATTRIBUTES` argument in [make-mesh](https://api.call-cc.org/5/doc/gl-utils/make-mesh), a list in the form:
 
     (NAME TYPE N [normalized: NORMALIZED])
 
@@ -624,7 +623,7 @@ where `NAME` is the attribute name (as a symbol), `TYPE` is the type of the attr
 
 These attributes correspond to the properties of each particle. All emitters are given the attribute `(position #:float 3)`, so `ATTRIBUTES` is used to define any attributes beyond this default one.
 
-`N-PARTICLES` is a required argument, which defines the maximum number of particles that the emitter may create. `POSITION` is used to define the initial position of the emitter, while `RADIUS` is used to define the radius of its bounding sphere. Unlike most nodes, the radius of the bounding sphere of an emitter cannot be meaningfully changed after it is created, so make sure to properly initialize it. As with `add-node`, `UNIFORM-ARGS` is the set of other keywords used to set the value for each uniform in the pipeline, as required by the [glls renderable](http://wiki.call-cc.org/eggref/4/glls#renderables) makers, specific to the `PIPELINE` that is used.
+`N-PARTICLES` is a required argument, which defines the maximum number of particles that the emitter may create. `POSITION` is used to define the initial position of the emitter, while `RADIUS` is used to define the radius of its bounding sphere. Unlike most nodes, the radius of the bounding sphere of an emitter cannot be meaningfully changed after it is created, so make sure to properly initialize it. As with `add-node`, `UNIFORM-ARGS` is the set of other keywords used to set the value for each uniform in the pipeline, as required by the [glls renderable](https://wiki.call-cc.org/egg/glls#renderables) makers, specific to the `PIPELINE` that is used.
 
     [procedure] (delete-emitter EMITTER)
 
@@ -646,15 +645,15 @@ Delete the given `PARTICLE` from `EMITTER`.
 
 
 ### Text
-Hypergiant reexports all of [gl-type](http://wiki.call-cc.org/eggref/4/gl-type) with no modifications. The following utilities are additionally provided:
+Hypergiant reexports all of [gl-type](https://wiki.call-cc.org/egg/gl-type) with no modifications. The following utilities are additionally provided:
 
     [procedure] (update-string-mesh! MESH NODE STRING FACE)
 
-Used to modify an existing string mesh, this is similar to calling [`string-mesh`](http://api.call-cc.org/doc/gl-type/string-mesh) with the `mesh:` argument, but additionally updates the `NODE`’s renderable to properly display the new `STRING`. `MESH` should be a mesh that was created with `string-mesh`. When the mesh’s VAO is created, it must have a non-static usage (i.e. setting `add-node`’s `usage:` keyword to `#:dynamic` or `#:stream`). `NODE` is a node associated with that mesh, which must have been created with a render-pipeline. `FACE` is a font face created with [`load-face`](http://api.call-cc.org/doc/gl-type/load-face). The number of graphical characters (non-whitespace characters in the char-set of `FACE`) in `STRING` must be equal to or less than the number of graphical characters in the string used to create `MESH`.
+Used to modify an existing string mesh, this is similar to calling [`string-mesh`](https://api.call-cc.org/5/doc/gl-type/string-mesh) with the `mesh:` argument, but additionally updates the `NODE`’s renderable to properly display the new `STRING`. `MESH` should be a mesh that was created with `string-mesh`. When the mesh’s VAO is created, it must have a non-static usage (i.e. setting `add-node`’s `usage:` keyword to `#:dynamic` or `#:stream`). `NODE` is a node associated with that mesh, which must have been created with a render-pipeline. `FACE` is a font face created with [`load-face`](https://api.call-cc.org/5/doc/gl-type/load-face). The number of graphical characters (non-whitespace characters in the char-set of `FACE`) in `STRING` must be equal to or less than the number of graphical characters in the string used to create `MESH`.
 
     [procedure] (make-string-mesh N-CHARS)
 
-Creates a mesh similar to those created by [`string-mesh`](http://api.call-cc.org/doc/gl-type/string-mesh) with space reserved for N-CHARS. Intended to be used with `update-string-mesh!`.
+Creates a mesh similar to those created by [`string-mesh`](https://api.call-cc.org/5/doc/gl-type/string-mesh) with space reserved for N-CHARS. Intended to be used with `update-string-mesh!`.
 
 
 ### Colors
@@ -690,7 +689,7 @@ Two pre-defined RGB colors, with unambiguous names.
 
 
 ### Math
-Hypergiant reexports all of [gl-math](http://wiki.call-cc.org/eggref/4/gl-math) with no modifications. The following math functions are additionally provided:
+Hypergiant reexports all of [gl-math](https://wiki.call-cc.org/egg/gl-math) with no modifications. The following math functions are additionally provided:
 
     [procedure] (random-normal [MEAN] [VARIANCE])
 
@@ -710,7 +709,7 @@ Given the number `X`, return a value that is the same, so long as it is not grea
 
 
 #### Vector operations
-The following operate on the 3 element vectors ([`point`s](http://wiki.call-cc.org/eggref/4/gl-math#vector-operations)) defined in gl-math.
+The following operate on the 3 element vectors ([`point`s](https://wiki.call-cc.org/egg/gl-math#vector-operations)) defined in gl-math.
 
     [procedure] (vclamp VECTOR LOWER UPPER [NON-GC?])
     [procedure] (vclamp! VECTOR LOWER UPPER)
@@ -729,13 +728,12 @@ Return the result of the dividing each element of `VECTOR` with scalar `S`. If a
 Return a point that has had the operation `round`, `floor`, `ceiling`, or `truncate` performed on each element of `VECTOR`. If `NON-GC?` is `#t`, the point is created in a non-garbage-collected area (the memory will still be freed when there are no more references to the vector).
 
 ## Examples
-See the [examples directory](https://github.com/AlexCharlton/Hypergiant/tree/master/examples) for several examples that use Hypergiant.
+See the [examples directory](https://www.upyum.com/cgit.cgi/hypergiant/tree/examples) for several examples that use Hypergiant.
 
 The following example shows the creation and addition of a multi-coloured square to a scene:
 
 ``` scheme
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))
@@ -790,12 +788,14 @@ Make sure Hyperscene, soil, glls, gl-utils, noise, and gl-type are up to date be
 * Initial release
 
 ## Source repository
-Source available on [GitHub](https://github.com/AlexCharlton/hypergiant).
+Source available [here](https://www.upyum.com/cgit.cgi/hypergiant/)
 
-Bug reports and patches welcome! Bugs can be reported via GitHub or to alex.n.charlton at gmail.
+Bug reports and patches welcome! Bugs can be reported to kooda@upyum.com
 
-## Author
+## Authors
 Alex Charlton
+
+Adrien (Kooda) Ramos
 
 ## License
 BSD-2-Clause

@@ -3,9 +3,9 @@
 ;;;; This example illustrates how post-processing effects can be applied in Hypergiant, implementing a single-axis Gaussian blur
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL post-processing.scm
+;;;; csc -L -lepoxy post-processing.scm
 
 
 (import scheme (chicken base) (chicken bitwise) hypergiant)

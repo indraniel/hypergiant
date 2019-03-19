@@ -3,9 +3,9 @@
 ;;;; This example illustrates IQM model loading and animating
 
 ;;;; NOTE:
-;;;; If this file is compiled, since it uses glls-render, it must also be linked with OpenGL
+;;;; If this file is compiled, since it uses glls-render, it must also be linked with libepoxy
 ;;;; E.g.:
-;;;; csc -lGL models.scm
+;;;; csc -L -lepoxy models.scm
 
 ;;;; Use arrow keys (and shift) to rotate, zoom camera.
 
@@ -14,8 +14,7 @@
 ;;;; This is not currently supported.
 ;;;; I think it looks pretty cool like this, though.
 
-(import chicken scheme)
-(use hypergiant)
+(import scheme (chicken base) hypergiant)
 
 (define scene (make-parameter #f))
 (define camera (make-parameter #f))
@@ -83,9 +82,9 @@
 
 (define (update delta)
   (update-animated-model! (animated-model) delta)
-  (yaw-camera! (camera) (/ (pan) 30))
-  (pitch-camera! (camera) (/ (tilt) 30))
-  (roll-camera! (camera) (/ (c-roll) 30))
-  (zoom-camera! (camera) (/ (zoom) 10)))
+  (yaw-camera! (camera) (/ (pan) 30.))
+  (pitch-camera! (camera) (/ (tilt) 30.))
+  (roll-camera! (camera) (/ (c-roll) 30.))
+  (zoom-camera! (camera) (/ (zoom) 10.)))
 
 (start 640 480 "Models" resizable: #f init: init update: update)
