@@ -1,0 +1,14 @@
+#!/bin/sh
+
+epoxy_cflags="`pkg-config --cflags epoxy`"
+
+if test "$?" -ne "0"; then
+    echo '' 1>&2
+    echo 'libepoxy does not appear to be installed!' 1>&2
+    echo 'make sure you also have the developpement package installed (libepoxy-dev on Debian based systems)' 1>&2
+    exit 1
+fi
+
+epoxy_ldflags="`pkg-config --libs epoxy`"
+
+"$CHICKEN_CSC" $@ -C "$epoxy_cflags" -L "$epoxy_ldflags"
