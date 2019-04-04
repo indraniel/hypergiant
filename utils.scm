@@ -36,17 +36,17 @@
 ;;; Colors
 (define (make-rgb-color r g b #!optional non-gc?)
   (let ((v (make-f32vector 3 0 non-gc?)))
-    (f32vector-set! v 0 r)
-    (f32vector-set! v 1 g)
-    (f32vector-set! v 2 b)
+    (f32vector-set! v 0 (exact->inexact r))
+    (f32vector-set! v 1 (exact->inexact g))
+    (f32vector-set! v 2 (exact->inexact b))
     v))
 
 (define (make-rgba-color r g b a #!optional non-gc?)
   (let ((v (make-f32vector 4 0 non-gc?)))
-    (f32vector-set! v 0 r)
-    (f32vector-set! v 1 g)
-    (f32vector-set! v 2 b)
-    (f32vector-set! v 3 a)
+    (f32vector-set! v 0 (exact->inexact r))
+    (f32vector-set! v 1 (exact->inexact g))
+    (f32vector-set! v 2 (exact->inexact b))
+    (f32vector-set! v 3 (exact->inexact a))
     v))
 
 (define (color-r c)
@@ -62,21 +62,21 @@
   (f32vector-ref c 3))
 
 (define (color-r-set! c r)
-  (f32vector-set! c 0 r))
+  (f32vector-set! c 0 (exact->inexact r)))
 
 (define (color-g-set! c g)
-  (f32vector-set! c 1 g))
+  (f32vector-set! c 1 (exact->inexact g)))
 
 (define (color-b-set! c b)
-  (f32vector-set! c 2 b))
+  (f32vector-set! c 2 (exact->inexact b)))
 
 (define (color-a-set! c a)
-  (f32vector-set! c 3 a))
+  (f32vector-set! c 3 (exact->inexact a)))
 
 (define (rgb-color-set! c r g b)
-  (color-r-set! c r)
-  (color-g-set! c g)
-  (color-b-set! c b))
+  (color-r-set! c (exact->inexact r))
+  (color-g-set! c (exact->inexact g))
+  (color-b-set! c (exact->inexact b)))
 
 (define (rgba-color-set! c r g b a)
   (rgb-color-set! c r g b)
