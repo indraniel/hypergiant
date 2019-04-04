@@ -758,6 +758,27 @@ The following example shows the creation and addition of a multi-coloured square
 [Prototype to polish: Making games in CHICKEN Scheme with Hypergiant](http://alex-charlton.com/posts/Prototype_to_polish_Making_games_in_CHICKEN_Scheme_with_Hypergiant/) is a blog post that details the creation of a simple game with Hypergiant.
 
 ## Version history
+### Version 0.5.3
+4 April 2019
+
+* Convert color components to flonum automatically
+
+### Version 0.5.2
+21 March 2019
+
+* Link hypergiant-shaders to epoxy
+
+### Version 0.5.1
+19 March 2019
+
+* Add forgotten dependency on srfi-18 and suppress a warning
+
+### Version 0.5.0
+19 March 2019
+
+* Maintenance given to [Kooda](/users/kooda)
+* Port to CHICKEN 5
+
 ### Version 0.4.0
 8 August 2015
 
