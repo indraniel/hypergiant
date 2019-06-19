@@ -34,6 +34,14 @@ While Hypergiant doesn’t require any external libraries directly, epoxy and gl
 
 When installing GLFW on OS X through Homebrew, an extra step is needed. Homebrew renames the library’s from the default. You can fix this by creating a link that points to the library that gets installed. E.g. `sudo ln -s <homebrew-lib-dir>/glfw3.dylib /usr/local/lib/libglfw.dylib`
 
+### macOS 10.14 Mojave Notes
+
+macOS 10.14 and onwards [do not necessarily come with OpenGL pre-installed](https://shiva-engine.com/thoughts-on-the-deprecation-of-opengl-on-macos/).  As of Spring/Summer of 2019, one workaround is to install [The Mesa 3D Graphics Library](https://www.mesa3d.org/).  You can do the following to install all the external prerequisite libraries via [homebrew](https://brew.sh):
+
+```
+brew install mesa glew glfw freetype libepoxy
+```
+
 
 ## Documentation
 Hypergiant is a largely a glue library, intending to make the creation of real-time graphical applications easier. The main tasks that it supports are:
