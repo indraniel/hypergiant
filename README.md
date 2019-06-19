@@ -1,3 +1,5 @@
+_(This is a fork of [hypergiant][0] from [www.upyum.com][1], which initially ported this library from Chicken Scheme 4 to Chicken Scheme 5)_
+
 # Hypergiant
 Hypergiant is an OpenGL-based library for games and other interactive media applications written in CHICKEN Scheme. Its philosophy is that it should be easy to efficiently perform common operations, but it shouldn’t be hard to do anything else. Hypergiant is therefore not a framework or an engine, and doesn’t force you into any one mode of operation. Rather it’s role is to act as a glue between other graphics libraries.
 
@@ -820,3 +822,6 @@ Adrien (Kooda) Ramos
 
 ## License
 BSD-2-Clause
+
+[0]: https://github.com/AlexCharlton/Hypergiant
+[1]: https://www.upyum.com/cgit.cgi/hypergiant/
