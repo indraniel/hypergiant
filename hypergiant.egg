@@ -21,6 +21,7 @@
              (extension hypergiant-render-pipeline
                         (source "render-pipeline.scm"))
              (extension hypergiant-particles
+                        (custom-build build-particles)
                         (source "particles.scm")
                         (component-dependencies hypergiant-render-pipeline))
              (extension hypergiant-window
