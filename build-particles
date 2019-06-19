@@ -1,14 +1,3 @@
 #!/bin/sh
 
-#Users/idas/sw/chicken-scheme/5.0.0/bin/csc \
-#    -vvv \
-#    -host \
-#    -D compiling-extension \
-#    -J -s -setup-mode \
-#    -I /tmp/hypergiant \
-#    -C -I/tmp/hypergiant -O3 -d0 -I./hyperscene/include/ -I./hyperscene/hypermath/include/ \
-#    ./hyperscene/src/*.c ./hyperscene/hypermath/src/*.c \
-#    particles.scm -o /tmp/hypergiant/hypergiant-particles.so
-set -o xtrace
 "$CHICKEN_CSC" -C -I./hyperscene/include/ -I./hyperscene/hypermath/include/ ./hyperscene/src/*.c ./hyperscene/hypermath/src/*.c $@
-set +o xtrace
